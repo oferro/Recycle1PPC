@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/ed_txt_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Flight Date YYYY-MM-DD"
+        android:inputType="text|date"
+        android:padding="3dp" />
+
+    <EditText
+        android:id="@+id/ed_txt_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="User (int)"
+        android:inputType="text"
+        android:padding="3dp" />
+
+    <EditText
+        android:id="@+id/ed_txt_ppc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ppc (int)"
+        android:inputType="text"
+        android:padding="3dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/ed_txt_air_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Air Field (String)"
+        android:inputType="text"
+        android:padding="3dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/ed_txt_flt_route"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Flight Route (String)"
+        android:inputType="text|textMultiLine"
+        android:padding="3dp" />
+
+    <EditText
+        android:id="@+id/ed_txt_to_hour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Flight Takeoff time (HH:mm)"
+        android:inputType="text"
+        android:padding="3dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/ed_txt_lnd_hour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Flight Landing time (HH:mm)"
+        android:inputType="text"
+        android:padding="3dp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_update_flight"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Update User"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_update_cancel"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Cancel"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+</LinearLayout>
