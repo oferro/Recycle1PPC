@@ -1,6 +1,6 @@
-package com.example.oferr.recycle1.my_interface;
+package com.example.oferr.recyclePPC.my_interface;
 
-import com.example.oferr.recycle1.model.Flight;
+import com.example.oferr.recyclePPC.model.Flight;
 
 import java.util.ArrayList;
 
@@ -8,7 +8,6 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.PUT;
-import retrofit2.http.Path;
 
 public interface GetFlightDataService
 {

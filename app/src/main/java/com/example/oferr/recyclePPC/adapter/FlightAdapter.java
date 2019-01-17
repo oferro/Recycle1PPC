@@ -1,4 +1,4 @@
-package com.example.oferr.recycle1.adapter;
+package com.example.oferr.recyclePPC.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.oferr.recycle1.R;
-import com.example.oferr.recycle1.model.Flight;
+import com.example.oferr.recyclePPC.model.Flight;
 
 import java.util.ArrayList;
 

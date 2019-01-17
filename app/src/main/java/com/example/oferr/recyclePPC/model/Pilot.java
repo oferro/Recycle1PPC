@@ -1,4 +1,4 @@
-package com.example.oferr.recycle1.model;
+package com.example.oferr.recyclePPC.model;
 
 import com.google.gson.annotations.SerializedName;
 

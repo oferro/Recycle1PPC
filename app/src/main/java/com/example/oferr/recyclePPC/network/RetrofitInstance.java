@@ -1,4 +1,4 @@
-package com.example.oferr.recycle1.network;
+package com.example.oferr.recyclePPC.network;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
