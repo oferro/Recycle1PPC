@@ -37,7 +37,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    Button add, btn_update, btn_cancel;
+    Button add, btn_add, btn_cancel;
 
     ArrayList<Flight> list = new ArrayList<>();
     FlightAdapter adapter = new FlightAdapter(list);
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     AlertDialog dialog;
 
     EditText md_txt_date, md_txt_user, md_txt_ppc, md_txt_air_field, md_txt_flt_route, md_txt_to_hour, md_txt_lnd_hour;
-    EditText ed_txt_date, ed_txt_user, ed_txt_ppc, ed_txt_air_field, ed_txt_flt_route, ed_txt_to_hour, ed_txt_lnd_hour;
+    EditText ad_txt_date, ad_txt_user, ad_txt_ppc, ad_txt_air_field, ad_txt_flt_route, ad_txt_to_hour, ad_txt_lnd_hour;
 
 //    String date, user, ppc, airField, fltRoute, toHour, lndHour;
 
@@ -69,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
         md_txt_lnd_hour = (EditText) findViewById(R.id.md_txt_lnd_hour);
 
         add = (Button) findViewById(R.id.btn_add);
-        btn_update = (Button) findViewById(R.id.btn_update_flight);
-        btn_cancel = (Button) findViewById(R.id.btn_update_cancel);
+        btn_add = (Button) findViewById(R.id.btn_add_flight);
+        btn_cancel = (Button) findViewById(R.id.btn_add_cancel);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -103,30 +103,29 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-//todo:ok Now its work The adapter obj was null. I have initilaze it with empty list
-        adapter.setOnItemClickListener(new ItemClickListener() {
-            @Override
-            public void OnItemClick(int position, Flight flight) {
-
-                builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("Update Flight Info");
-                builder.setCancelable(false);
-                View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog_update,null,false);
-                InitUpdateDialog(position,view);
-                builder.setView(view);
-                dialog = builder.create();
-                dialog.show();
-            }
-        });
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ad_txt_date = view.findViewById(R.id.ed_txt_date);
+                ad_txt_user = view.findViewById(R.id.ed_txt_user);
+                ad_txt_ppc = view.findViewById(R.id.ed_txt_ppc);
+                ad_txt_air_field = view.findViewById(R.id.ed_txt_air_field);
+                ad_txt_flt_route = view.findViewById(R.id.ed_txt_flt_route);
+                ad_txt_to_hour = view.findViewById(R.id.ed_txt_to_hour);
+                ad_txt_lnd_hour = view.findViewById(R.id.ed_txt_lnd_hour);
+                btn_add = view.findViewById(R.id.btn_add_flight);
+                btn_cancel = view.findViewById(R.id.btn_add_cancel);
 
-
-
+                builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Add New Flight Info");
+                builder.setCancelable(false);
+                view = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog_add,null,false);
+                InitAddDialog(view);
+                builder.setView(view);
+                dialog = builder.create();
+                dialog.show();
             }
-
         });
     }
 
@@ -140,19 +139,17 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    private void InitUpdateDialog(final int position, View view) {
+    private void InitAddDialog(View view) {
 
-        final String id= list.get(position).getId();
-
-        ed_txt_date = view.findViewById(R.id.ed_txt_date);
-        ed_txt_user = view.findViewById(R.id.ed_txt_user);
-        ed_txt_ppc = view.findViewById(R.id.ed_txt_ppc);
-        ed_txt_air_field = view.findViewById(R.id.ed_txt_air_field);
-        ed_txt_flt_route = view.findViewById(R.id.ed_txt_flt_route);
-        ed_txt_to_hour = view.findViewById(R.id.ed_txt_to_hour);
-        ed_txt_lnd_hour = view.findViewById(R.id.ed_txt_lnd_hour);
-        btn_update = view.findViewById(R.id.btn_update_flight);
-        btn_cancel = view.findViewById(R.id.btn_update_cancel);
+        ad_txt_date = view.findViewById(R.id.ad_txt_date);
+        ad_txt_user = view.findViewById(R.id.ad_txt_user);
+        ad_txt_ppc = view.findViewById(R.id.ad_txt_ppc);
+        ad_txt_air_field = view.findViewById(R.id.ad_txt_air_field);
+        ad_txt_flt_route = view.findViewById(R.id.ad_txt_flt_route);
+        ad_txt_to_hour = view.findViewById(R.id.ad_txt_to_hour);
+        ad_txt_lnd_hour = view.findViewById(R.id.ad_txt_lnd_hour);
+        btn_add = view.findViewById(R.id.btn_add_flight);
+        btn_cancel = view.findViewById(R.id.btn_add_cancel);
 
 //
 //        ed_txt_date.setText(list.get(position).getFlDate());
@@ -163,17 +160,17 @@ public class MainActivity extends AppCompatActivity {
 //        ed_txt_to_hour.setText(list.get(position).getFlToTime());
 //        ed_txt_lnd_hour.setText(list.get(position).getFLLndTime());
 //
-        btn_update.setOnClickListener(new View.OnClickListener() {
+        btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 String date, user, ppc, airField, fltRoute, toHour, lndHour;
 
-                date = ed_txt_date.getText().toString();
-                airField = ed_txt_air_field.getText().toString();
-                fltRoute = ed_txt_flt_route.getText().toString();
-                toHour = ed_txt_to_hour.getText().toString();
-                lndHour = ed_txt_lnd_hour.getText().toString();
+                date = ad_txt_date.getText().toString();
+                airField = ad_txt_air_field.getText().toString();
+                fltRoute = ad_txt_flt_route.getText().toString();
+                toHour = ad_txt_to_hour.getText().toString();
+                lndHour = ad_txt_lnd_hour.getText().toString();
 
                 Flight flight = new Flight();
 
@@ -187,9 +184,9 @@ public class MainActivity extends AppCompatActivity {
                 flight.setFlToTime(toHour);
                 flight.setFLLndTime(lndHour);
 
-                adapter.UpdateData(position,flight);
+                adapter.AddData(flight);
 
-                Toast.makeText(MainActivity.this,"flight Updated..",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"flight Added Successfully",Toast.LENGTH_SHORT).show();
 
             }
         });

@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.example.oferr.recycle1.R;
 import com.example.oferr.recyclePPC.MainActivity;
 import com.example.oferr.recyclePPC.model.Flight;
+import com.example.oferr.recyclePPC.my_interface.GetFlightDataService;
+import com.example.oferr.recyclePPC.network.RetrofitInstance;
 
 import java.util.ArrayList;
 
@@ -35,6 +37,10 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
         this.dataList = dataList;
     }
 
+    /** Create handle for the RetrofitInstance interface*/
+    GetFlightDataService service = RetrofitInstance.getRetrofitInstance().create(GetFlightDataService.class);
+
+
     @Override
     public FlightViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
@@ -44,7 +50,6 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
 
     @Override
     public void onBindViewHolder(FlightViewHolder holder,final int position) {
-        if (position >= 0 ) {
             final Flight flight = dataList.get(position);
 
             holder.txtDate.setText(dataList.get(position).getFlDate());
@@ -54,7 +59,6 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
             holder.txtFltRoute.setText(dataList.get(position).getFlRoute());
             holder.txtToHour.setText(dataList.get(position).getFlToTime());
             holder.txtLndHour.setText(dataList.get(position).getFLLndTime());
-        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,7 +80,9 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
         holder.tv_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Flight flight = dataList.get(position);
                 dataList.remove(position);
+                service.deleteFlightData(flight);
                 notifyDataSetChanged();
             }
         });
@@ -109,13 +115,20 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
         this.itemClickListener = itemClickListener;
     }
 
+    public void AddData (Flight flight){
+        dataList.add(flight);
+        service.addFlightData(flight);
+        notifyDataSetChanged();
+
+
+    }
 
     public void UpdateData(int position,Flight flight){
-        if(position<0){
-        } else {
-            dataList.remove(position);
-        }
+        dataList.remove(position);
         dataList.add(flight);
+
+        service.updateFlightData(flight);
+
         notifyItemChanged(position);
         notifyDataSetChanged();
     }
