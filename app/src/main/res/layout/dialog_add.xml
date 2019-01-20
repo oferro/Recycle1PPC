@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <EditText
-        android:id="@+id/ed_txt_date"
+        android:id="@+id/ad_txt_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Flight Date YYYY-MM-DD"
@@ -14,7 +14,7 @@
         android:padding="3dp" />
 
     <EditText
-        android:id="@+id/ed_txt_user"
+        android:id="@+id/ad_txt_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="User (int)"
@@ -22,7 +22,7 @@
         android:padding="3dp" />
 
     <EditText
-        android:id="@+id/ed_txt_ppc"
+        android:id="@+id/ad_txt_ppc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="ppc (int)"
@@ -31,7 +31,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/ed_txt_air_field"
+        android:id="@+id/ad_txt_air_field"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Air Field (String)"
@@ -40,7 +40,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/ed_txt_flt_route"
+        android:id="@+id/ad_txt_flt_route"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Flight Route (String)"
@@ -48,7 +48,7 @@
         android:padding="3dp" />
 
     <EditText
-        android:id="@+id/ed_txt_to_hour"
+        android:id="@+id/ad_txt_to_hour"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Flight Takeoff time (HH:mm)"
@@ -57,7 +57,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/ed_txt_lnd_hour"
+        android:id="@+id/ad_txt_lnd_hour"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Flight Landing time (HH:mm)"
@@ -72,15 +72,15 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_update_flight"
+            android:id="@+id/btn_add_flight"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:text="Update"
+            android:text="Add new"
             android:textAllCaps="false" />
 
         <Button
-            android:id="@+id/btn_update_cancel"
+            android:id="@+id/btn_add_cancel"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"

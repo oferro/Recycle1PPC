@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.oferr.recycle1.R;
 import com.example.oferr.recyclePPC.adapter.FlightAdapter;
+import com.example.oferr.recyclePPC.adapter.ItemClickListener;
 import com.example.oferr.recyclePPC.model.Flight;
 import com.example.oferr.recyclePPC.my_interface.GetFlightDataService;
 import com.example.oferr.recyclePPC.network.RetrofitInstance;
@@ -34,11 +36,11 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FlightAdapter adapter;
     private RecyclerView recyclerView;
     Button add, btn_update, btn_cancel;
 
-    List<Flight> list = new ArrayList<>();
+    ArrayList<Flight> list = new ArrayList<>();
+    FlightAdapter adapter = new FlightAdapter(list);
 
     AlertDialog.Builder builder;
 
@@ -101,25 +103,27 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-//todo: משהו לא עובד - לא ברור מה
-//        adapter.setOnItemClickListener(new ItemClickListener() {
-//            @Override
-//            public void OnItemClick(int position, Flight flight) {
-//
-//                builder = new AlertDialog.Builder(MainActivity.this);
-//                builder.setTitle("Update Flight Info");
-//                builder.setCancelable(false);
-//                View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog_update,null,false);
-//                InitUpdateDialog(position,view);
-//                builder.setView(view);
-//                dialog = builder.create();
-//                dialog.show();
-//            }
-//        });
+//todo:ok Now its work The adapter obj was null. I have initilaze it with empty list
+        adapter.setOnItemClickListener(new ItemClickListener() {
+            @Override
+            public void OnItemClick(int position, Flight flight) {
+
+                builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Update Flight Info");
+                builder.setCancelable(false);
+                View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog_update,null,false);
+                InitUpdateDialog(position,view);
+                builder.setView(view);
+                dialog = builder.create();
+                dialog.show();
+            }
+        });
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
 
             }
 
@@ -150,15 +154,15 @@ public class MainActivity extends AppCompatActivity {
         btn_update = view.findViewById(R.id.btn_update_flight);
         btn_cancel = view.findViewById(R.id.btn_update_cancel);
 
-
-        ed_txt_date.setText(list.get(position).getFlDate());
-        ed_txt_user.setText(list.get(position).getFlPilot().getFullName());
-        ed_txt_ppc.setText(list.get(position).getFlPpc().getPpName());
-        ed_txt_air_field.setText(list.get(position).getFLAirField());
-        ed_txt_flt_route.setText(list.get(position).getFlRoute());
-        ed_txt_to_hour.setText(list.get(position).getFlToTime());
-        ed_txt_lnd_hour.setText(list.get(position).getFLLndTime());
-
+//
+//        ed_txt_date.setText(list.get(position).getFlDate());
+//        ed_txt_user.setText(list.get(position).getFlPilot().getFullName());
+//        ed_txt_ppc.setText(list.get(position).getFlPpc().getPpName());
+//        ed_txt_air_field.setText(list.get(position).getFLAirField());
+//        ed_txt_flt_route.setText(list.get(position).getFlRoute());
+//        ed_txt_to_hour.setText(list.get(position).getFlToTime());
+//        ed_txt_lnd_hour.setText(list.get(position).getFLLndTime());
+//
         btn_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -166,8 +170,6 @@ public class MainActivity extends AppCompatActivity {
                 String date, user, ppc, airField, fltRoute, toHour, lndHour;
 
                 date = ed_txt_date.getText().toString();
-                user = ed_txt_user.getText().toString();
-                ppc = ed_txt_ppc.getText().toString();
                 airField = ed_txt_air_field.getText().toString();
                 fltRoute = ed_txt_flt_route.getText().toString();
                 toHour = ed_txt_to_hour.getText().toString();
@@ -175,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Flight flight = new Flight();
 
-                flight.setId(id);
+//                flight.setId(id);
                 flight.setFlDate(date);
 //ToDo : conect the oblects
 //                flight.setFlPilot(user);
