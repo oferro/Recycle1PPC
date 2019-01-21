@@ -60,13 +60,13 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        md_txt_date = (EditText) findViewById(R.id.md_txt_date);
-        md_txt_user = (EditText) findViewById(R.id.md_txt_user);
-        md_txt_ppc = (EditText) findViewById(R.id.md_txt_ppc);
-        md_txt_air_field = (EditText) findViewById(R.id.md_txt_air_field);
-        md_txt_flt_route = (EditText) findViewById(R.id.md_txt_flt_route);
-        md_txt_to_hour = (EditText) findViewById(R.id.md_txt_to_hour);
-        md_txt_lnd_hour = (EditText) findViewById(R.id.md_txt_lnd_hour);
+//        md_txt_date = (EditText) findViewById(R.id.md_txt_date);
+//        md_txt_user = (EditText) findViewById(R.id.md_txt_user);
+//        md_txt_ppc = (EditText) findViewById(R.id.md_txt_ppc);
+//        md_txt_air_field = (EditText) findViewById(R.id.md_txt_air_field);
+//        md_txt_flt_route = (EditText) findViewById(R.id.md_txt_flt_route);
+//        md_txt_to_hour = (EditText) findViewById(R.id.md_txt_to_hour);
+//        md_txt_lnd_hour = (EditText) findViewById(R.id.md_txt_lnd_hour);
 
         add = (Button) findViewById(R.id.btn_add);
         btn_add = (Button) findViewById(R.id.btn_add_flight);
@@ -184,9 +184,9 @@ public class MainActivity extends AppCompatActivity {
                 flight.setFlToTime(toHour);
                 flight.setFLLndTime(lndHour);
 
-                adapter.AddData(flight);
+                String msg = adapter.AddData(flight);
 
-                Toast.makeText(MainActivity.this,"flight Added Successfully",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
 
             }
         });

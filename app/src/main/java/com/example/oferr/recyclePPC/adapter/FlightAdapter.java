@@ -2,6 +2,7 @@ package com.example.oferr.recyclePPC.adapter;
 
 import android.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,10 @@ import com.example.oferr.recyclePPC.network.RetrofitInstance;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightViewHolder>
 {
     AlertDialog.Builder builder;
@@ -32,6 +37,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
     private ArrayList<Flight> dataList;
 
     ItemClickListener itemClickListener;
+    private String msg;
 
     public FlightAdapter(ArrayList<Flight> dataList) {
         this.dataList = dataList;
@@ -51,6 +57,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
     @Override
     public void onBindViewHolder(FlightViewHolder holder,final int position) {
             final Flight flight = dataList.get(position);
+
 
             holder.txtDate.setText(dataList.get(position).getFlDate());
             holder.txtUser.setText(dataList.get(position).getFlPilot().getFullName());
@@ -115,22 +122,64 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
         this.itemClickListener = itemClickListener;
     }
 
-    public void AddData (Flight flight){
+    public String AddData (Flight flight){
         dataList.add(flight);
-        service.addFlightData(flight);
+//        service.addFlightData(flight);
+        Call<Flight> call = service.addFlightData(flight);
+            call.enqueue(new Callback<Flight>(){
+                @Override
+                public void onResponse(Call<Flight> call, Response<Flight> response) {
+                    if(response.isSuccessful()){
+//                        Toast.makeText(MainActivity.this, "User created successfully!", Toast.LENGTH_SHORT).show();
+                        String msg = "User created successfully!";
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Flight> call, Throwable t) {
+                    Log.e("ERROR: ", t.getMessage());
+                    String msg = "Had problem add Flight";
+                }
+            });
+
+
+
         notifyDataSetChanged();
 
-
+        return msg;
     }
 
-    public void UpdateData(int position,Flight flight){
+    public String UpdateData(int position, Flight flight) {
         dataList.remove(position);
         dataList.add(flight);
 
         service.updateFlightData(flight);
 
+        Call<Flight> call = service.updateFlightData(flight);
+        call.enqueue(new Callback<Flight>() {
+            @Override
+            public void onResponse(Call<Flight> call, Response<Flight> response) {
+                if (response.isSuccessful()) {
+//                        Toast.makeText(.this, "User created successfully!", Toast.LENGTH_SHORT).show();
+                    String msg = "User updated successfully!";
+                    Log.i("INFO: ", "User Updated successfully");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Flight> call, Throwable t) {
+                Log.e("ERROR: ", t.getMessage());
+                String msg = "Had problem update Flight";
+            }
+        });
+
+
+        notifyDataSetChanged();
+
+
         notifyItemChanged(position);
         notifyDataSetChanged();
+        return msg;
     }
 
     private void InitUpdateDialog(final int position, View view) {
@@ -180,8 +229,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
                 flight.setFlToTime(toHour);
                 flight.setFLLndTime(lndHour);
 
-                UpdateData(position,flight);
-
+                String msg = UpdateData(position,flight);
                 dialog.dismiss();
 
 
