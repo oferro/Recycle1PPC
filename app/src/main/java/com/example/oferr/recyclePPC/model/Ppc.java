@@ -75,4 +75,12 @@ public class Ppc {
     public void setPpFuelQt(String ppFuelQt) {
         this.ppFuelQt = ppFuelQt;
     }
+
+    // ---------------------
+
+
+    @Override
+    public String toString() {
+        return ppName;
+    }
 }

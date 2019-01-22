@@ -82,4 +82,9 @@ public class Pilot {
         String fn = getPiFirstName() + " " + getPiLastName();
         return  fn;
     }
+
+    @Override
+    public String toString() {
+        return piFirstName + ' ' + piLastName;
+    }
 }

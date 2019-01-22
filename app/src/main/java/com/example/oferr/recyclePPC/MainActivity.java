@@ -15,14 +15,18 @@ import android.view.MenuItem;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.oferr.recycle1.R;
 import com.example.oferr.recyclePPC.adapter.FlightAdapter;
 import com.example.oferr.recyclePPC.adapter.ItemClickListener;
 import com.example.oferr.recyclePPC.model.Flight;
+import com.example.oferr.recyclePPC.model.Pilot;
+import com.example.oferr.recyclePPC.model.Ppc;
 import com.example.oferr.recyclePPC.my_interface.GetFlightDataService;
 import com.example.oferr.recyclePPC.network.RetrofitInstance;
 
@@ -41,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<Flight> list = new ArrayList<>();
     FlightAdapter adapter = new FlightAdapter(list);
+
+    ArrayList<Pilot> listPilot = new ArrayList<>();
+    ArrayList<Ppc> listPpc = new ArrayList<>();
 
     AlertDialog.Builder builder;
 
@@ -104,6 +111,44 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        /** Call the method with parameter in the interface to get the flight data*/
+        Call<ArrayList<Pilot>> callPilot = service.getPilotData();
+
+        /**Log the URL called*/
+        Log.wtf("URL Called", callPilot.request().url() + "");
+
+        callPilot.enqueue(new Callback<ArrayList<Pilot>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Pilot>> call, Response<ArrayList<Pilot>> response) {
+                listPilot = (response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Pilot>> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Something went wrong...Error message: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+        /** Call the method with parameter in the interface to get the flight data*/
+        Call<ArrayList<Ppc>> callPpc = service.getPpcData();
+
+        /**Log the URL called*/
+        Log.wtf("URL Called", callPpc.request().url() + "");
+
+        callPpc.enqueue(new Callback<ArrayList<Ppc>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Ppc>> call, Response<ArrayList<Ppc>> response) {
+                listPpc = (response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Ppc>> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Something went wrong...Error message: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setTitle("Add New Flight Info");
                 builder.setCancelable(false);
                 view = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog_add,null,false);
-                InitAddDialog(view);
+                InitAddDialog(view, listPilot, listPpc);
                 builder.setView(view);
                 dialog = builder.create();
                 dialog.show();
@@ -139,17 +184,32 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    private void InitAddDialog(View view) {
+
+//TODO: Insted of dialog I will open an add activity
+    private void InitAddDialog(View view, final ArrayList<Pilot> listPi, ArrayList<Ppc> listPp) {
 
         ad_txt_date = view.findViewById(R.id.ad_txt_date);
-        ad_txt_user = view.findViewById(R.id.ad_txt_user);
-        ad_txt_ppc = view.findViewById(R.id.ad_txt_ppc);
+//        ad_txt_user = view.findViewById(R.id.ad_txt_user);
+        final Spinner pilotSpinner = view.findViewById(R.id.ad_spinner_pilot);
+//        ad_txt_ppc = view.findViewById(R.id.ad_txt_ppc);
+        final Spinner ppcSpinner = view.findViewById(R.id.ad_spinner_ppc);
         ad_txt_air_field = view.findViewById(R.id.ad_txt_air_field);
         ad_txt_flt_route = view.findViewById(R.id.ad_txt_flt_route);
         ad_txt_to_hour = view.findViewById(R.id.ad_txt_to_hour);
         ad_txt_lnd_hour = view.findViewById(R.id.ad_txt_lnd_hour);
+
         btn_add = view.findViewById(R.id.btn_add_flight);
         btn_cancel = view.findViewById(R.id.btn_add_cancel);
+
+
+        ArrayAdapter<Pilot> adpPilot = new ArrayAdapter<Pilot>(this, android.R.layout.simple_spinner_item, listPi);
+        adpPilot.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        pilotSpinner.setAdapter(adpPilot);
+
+        ArrayAdapter<Ppc> adpPpc = new ArrayAdapter<Ppc>(this, android.R.layout.simple_spinner_item, listPp);
+        adpPpc.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ppcSpinner.setAdapter(adpPpc);
+
 
 //
 //        ed_txt_date.setText(list.get(position).getFlDate());
@@ -164,21 +224,25 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String date, user, ppc, airField, fltRoute, toHour, lndHour;
+                String date,  airField, fltRoute, toHour, lndHour;
+                final List<Pilot> lPilot = listPi;
+                final List<Ppc> lPpc = listPpc;
 
                 date = ad_txt_date.getText().toString();
                 airField = ad_txt_air_field.getText().toString();
                 fltRoute = ad_txt_flt_route.getText().toString();
                 toHour = ad_txt_to_hour.getText().toString();
                 lndHour = ad_txt_lnd_hour.getText().toString();
+                Pilot user = lPilot.get(pilotSpinner.getId());
+                Ppc ppc = lPpc.get(ppcSpinner.getId());
 
                 Flight flight = new Flight();
 
 //                flight.setId(id);
                 flight.setFlDate(date);
 //ToDo : conect the oblects
-//                flight.setFlPilot(user);
-//                flight.setFlPpc(ppc);
+                flight.setFlPilot(user);
+                flight.setFlPpc(ppc);
                 flight.setFLAirField(airField);
                 flight.setFlRoute(fltRoute);
                 flight.setFlToTime(toHour);

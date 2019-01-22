@@ -75,7 +75,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
                 builder.setTitle("Update Flight Info");
                 builder.setCancelable(false);
                 view = LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_update,null,false);
-                InitUpdateDialog(position,view);
+                InitUpdateDialog(position,view, flight);
                 builder.setView(view);
                 dialog = builder.create();
                 dialog.show();
@@ -153,7 +153,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
         dataList.remove(position);
         dataList.add(flight);
 
-        service.updateFlightData(flight);
+//        service.updateFlightData(flight);
 
         Call<Flight> call = service.updateFlightData(flight);
         call.enqueue(new Callback<Flight>() {
@@ -182,7 +182,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
         return msg;
     }
 
-    private void InitUpdateDialog(final int position, View view) {
+    private void InitUpdateDialog(final int position, View view, Flight flight) {
 
         final String id= dataList.get(position).getId();
 
@@ -221,7 +221,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
 
 //                flight.setId(id);
                 flight.setFlDate(date);
-//ToDo : conect the oblects
+//ToDo : conect the objects
 //                flight.setFlPilot(user);
 //                flight.setFlPpc(ppc);
                 flight.setFLAirField(airField);

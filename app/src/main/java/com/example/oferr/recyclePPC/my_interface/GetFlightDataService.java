@@ -1,6 +1,8 @@
 package com.example.oferr.recyclePPC.my_interface;
 
 import com.example.oferr.recyclePPC.model.Flight;
+import com.example.oferr.recyclePPC.model.Pilot;
+import com.example.oferr.recyclePPC.model.Ppc;
 
 import java.util.ArrayList;
 
@@ -23,5 +25,11 @@ public interface GetFlightDataService
 
     @PUT("and/flightAdd")
     Call<Flight> addFlightData(@Body Flight flight);
+
+    @GET("and/pilots")
+    Call<ArrayList<Pilot>> getPilotData();
+
+    @GET("and/ppcs")
+    Call<ArrayList<Ppc>> getPpcData();
 
 }

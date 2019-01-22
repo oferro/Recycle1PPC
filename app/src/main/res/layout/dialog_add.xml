@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -13,24 +14,51 @@
         android:inputType="text|date"
         android:padding="3dp" />
 
-    <EditText
-        android:id="@+id/ad_txt_user"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="User (int)"
-        android:inputType="text"
-        android:padding="3dp" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/ad_txt_ppc"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/ad_txt_user"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="ppc (int)"
+        android:layout_weight="1"
         android:inputType="text"
         android:padding="3dp"
-        android:textStyle="bold" />
+        android:textSize="@dimen/RecycleViewText"
+        tools:text="Pilot :" />
 
-    <EditText
+    <Spinner
+        android:id="@+id/ad_spinner_pilot"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3" />
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/ad_txt_ppc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="text"
+            android:padding="3dp"
+            android:textSize="@dimen/RecycleViewText"
+            tools:text="PPC     :" />
+
+        <Spinner
+            android:id="@+id/ad_spinner_ppc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3" />
+    </LinearLayout>
+
+  <EditText
         android:id="@+id/ad_txt_air_field"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
