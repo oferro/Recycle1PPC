@@ -233,14 +233,13 @@ public class MainActivity extends AppCompatActivity {
                 fltRoute = ad_txt_flt_route.getText().toString();
                 toHour = ad_txt_to_hour.getText().toString();
                 lndHour = ad_txt_lnd_hour.getText().toString();
-                Pilot user = lPilot.get(pilotSpinner.getId());
-                Ppc ppc = lPpc.get(ppcSpinner.getId());
+//ToDo :ok conect the oblects - work !!
+                Pilot user = listPilot.get(pilotSpinner.getSelectedItemPosition());
+                Ppc ppc = listPpc.get(ppcSpinner.getSelectedItemPosition());
 
                 Flight flight = new Flight();
 
-//                flight.setId(id);
                 flight.setFlDate(date);
-//ToDo : conect the oblects
                 flight.setFlPilot(user);
                 flight.setFlPpc(ppc);
                 flight.setFLAirField(airField);
@@ -252,6 +251,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
 
+                dialog.dismiss();
             }
         });
         btn_cancel.setOnClickListener(new View.OnClickListener() {

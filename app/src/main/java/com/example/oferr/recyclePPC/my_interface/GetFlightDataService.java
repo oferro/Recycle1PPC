@@ -10,6 +10,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.PUT;
 
 public interface GetFlightDataService
@@ -20,7 +21,7 @@ public interface GetFlightDataService
     @PUT("and/flightUpdate")
     Call<Flight> updateFlightData(@Body Flight flight);
 
-    @PUT("and/flightDelete")
+    @POST("and/flightDelete")
     Call<Flight> deleteFlightData(@Body Flight flight);
 
     @PUT("and/flightAdd")

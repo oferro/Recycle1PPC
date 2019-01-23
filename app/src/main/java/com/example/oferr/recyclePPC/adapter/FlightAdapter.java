@@ -124,22 +124,21 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
 
     public String AddData (Flight flight){
         dataList.add(flight);
-//        service.addFlightData(flight);
         Call<Flight> call = service.addFlightData(flight);
             call.enqueue(new Callback<Flight>(){
                 @Override
                 public void onResponse(Call<Flight> call, Response<Flight> response) {
                     if(response.isSuccessful()){
-//                        Toast.makeText(MainActivity.this, "User created successfully!", Toast.LENGTH_SHORT).show();
-                        String msg = "User created successfully!";
+                        msg = "User created successfully!";
                     }
                 }
 
                 @Override
                 public void onFailure(Call<Flight> call, Throwable t) {
                     Log.e("ERROR: ", t.getMessage());
-                    String msg = "Had problem add Flight";
+                    msg = "Had problem add Flight";
                 }
+
             });
 
 
