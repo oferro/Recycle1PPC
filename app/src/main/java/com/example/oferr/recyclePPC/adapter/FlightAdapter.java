@@ -32,8 +32,8 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
     Button add, btn_update, btn_cancel;
 
     EditText md_txt_date, md_txt_user, md_txt_ppc, md_txt_air_field, md_txt_flt_route, md_txt_to_hour, md_txt_lnd_hour;
-    EditText ed_txt_date, ed_txt_user, ed_txt_ppc, ed_txt_air_field, ed_txt_flt_route, ed_txt_to_hour, ed_txt_lnd_hour;
-
+    EditText ed_txt_date,  ed_txt_air_field, ed_txt_flt_route, ed_txt_to_hour, ed_txt_lnd_hour;
+    TextView ed_txt_user, ed_txt_ppc;
     private ArrayList<Flight> dataList;
 
     ItemClickListener itemClickListener;
@@ -216,8 +216,8 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
 
 
         ed_txt_date.setText(dataList.get(position).getFlDate());
-        ed_txt_user.setText(dataList.get(position).getFlPilot().getFullName());
-        ed_txt_ppc.setText(dataList.get(position).getFlPpc().getPpName());
+        ed_txt_user.setText(dataList.get(position).getFlPilot().getFullName()); //ReadOnly
+        ed_txt_ppc.setText(dataList.get(position).getFlPpc().getPpName());      //ReadOnly
         ed_txt_air_field.setText(dataList.get(position).getFLAirField());
         ed_txt_flt_route.setText(dataList.get(position).getFlRoute());
         ed_txt_to_hour.setText(dataList.get(position).getFlToTime());

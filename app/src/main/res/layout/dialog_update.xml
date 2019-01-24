@@ -13,7 +13,7 @@
         android:inputType="text|date"
         android:padding="3dp" />
 
-    <EditText
+    <TextView
         android:id="@+id/ed_txt_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         android:inputType="text"
         android:padding="3dp" />
 
-    <EditText
+    <TextView
         android:id="@+id/ed_txt_ppc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -73,13 +73,17 @@
 
         <TextView
             android:id="@+id/tv_delete_item"
-            android:layout_width="83dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="5dp"
+            android:background="@android:color/holo_orange_light"
+            android:gravity="center"
             android:text="Delete"
-            android:textSize="@dimen/RecycleViewText" />
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="@dimen/RecycleViewText"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
