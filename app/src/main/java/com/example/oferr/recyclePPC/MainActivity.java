@@ -249,6 +249,7 @@ public class MainActivity extends AppCompatActivity {
 
                 String msg = adapter.AddData(flight);
 
+
                 Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
 
                 dialog.dismiss();

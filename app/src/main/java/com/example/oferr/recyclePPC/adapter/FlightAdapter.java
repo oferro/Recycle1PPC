@@ -88,9 +88,28 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
             @Override
             public void onClick(View view) {
                 Flight flight = dataList.get(position);
+                int id = Integer.parseInt(flight.getId());
                 dataList.remove(position);
-                service.deleteFlightData(flight);
+
+                Call<Flight> callFlightDel = service.deleteFlightData(id);
+                callFlightDel.enqueue(new Callback<Flight>() {
+                    @Override
+                    public void onResponse(Call<Flight> call, Response<Flight> response) {
+                        if (response.isSuccessful()) {
+//                        Toast.makeText(.this, "User created successfully!", Toast.LENGTH_SHORT).show();
+                            Log.i("INFO: ", "Flight deleted at position: " + position);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Flight> call, Throwable t) {
+                        Log.e("ERROR: ", t.getMessage());
+                    }
+                });
+
+
                 notifyDataSetChanged();
+                Log.i("Info", "Flight deleted ta position: " + position + ", id = " + id);
             }
         });
     }
