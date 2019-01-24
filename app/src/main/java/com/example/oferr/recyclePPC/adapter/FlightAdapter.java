@@ -96,7 +96,6 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
                     @Override
                     public void onResponse(Call<Flight> call, Response<Flight> response) {
                         if (response.isSuccessful()) {
-//                        Toast.makeText(.this, "User created successfully!", Toast.LENGTH_SHORT).show();
                             Log.i("INFO: ", "Flight deleted at position: " + position);
                         }
                     }
@@ -141,13 +140,17 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
         this.itemClickListener = itemClickListener;
     }
 
-    public String AddData (Flight flight){
+    public String AddData (final Flight flight){
         dataList.add(flight);
         Call<Flight> call = service.addFlightData(flight);
             call.enqueue(new Callback<Flight>(){
                 @Override
                 public void onResponse(Call<Flight> call, Response<Flight> response) {
                     if(response.isSuccessful()){
+//ToDo: Find a way to update the new Flight ID
+                        Flight flNew = response.body();
+                        String id = flNew.getId().toString();
+                        flight.setId(id);
                         msg = "User created successfully!";
                     }
                 }

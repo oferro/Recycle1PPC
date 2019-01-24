@@ -14,7 +14,15 @@
         android:inputType="text|date"
         android:padding="3dp" />
 
-<LinearLayout
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select from list (PPC, Pilot)"
+        android:textStyle="bold"
+        tools:text="Select from list (PPC, Pilot)" />
+
+    <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
@@ -26,7 +34,9 @@
         android:layout_weight="1"
         android:inputType="text"
         android:padding="5dp"
+        android:text="Pilot :"
         android:textSize="@dimen/RecycleViewText"
+        android:textStyle="bold"
         tools:text="Pilot :" />
 
     <Spinner
@@ -48,7 +58,9 @@
             android:layout_weight="1"
             android:inputType="text"
             android:padding="5dp"
+            android:text="PPC :"
             android:textSize="@dimen/RecycleViewText"
+            android:textStyle="bold"
             tools:text="PPC :" />
 
         <Spinner
