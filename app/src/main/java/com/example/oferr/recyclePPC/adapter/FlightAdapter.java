@@ -1,6 +1,7 @@
 package com.example.oferr.recyclePPC.adapter;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +23,8 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.support.v4.content.ContextCompat.startActivity;
 
 public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightViewHolder>
 {
@@ -148,9 +151,6 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
                 public void onResponse(Call<Flight> call, Response<Flight> response) {
                     if(response.isSuccessful()){
 //ToDo: Find a way to update the new Flight ID
-                        Flight flNew = response.body();
-                        String id = flNew.getId().toString();
-                        flight.setId(id);
                         msg = "User created successfully!";
                     }
                 }

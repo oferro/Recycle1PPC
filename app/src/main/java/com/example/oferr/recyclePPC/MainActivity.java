@@ -1,6 +1,7 @@
 package com.example.oferr.recyclePPC;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -36,6 +37,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.support.v4.content.ContextCompat.startActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -252,15 +255,22 @@ public class MainActivity extends AppCompatActivity {
 
                 Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
 
-                dialog.dismiss();
+                Intent i = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(i);
+//                dialog.dismiss();
             }
         });
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.dismiss();
+//                dialog.dismiss();
+                Intent i = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(i);
+
             }
         });
+
+
     }
 
 
@@ -283,6 +293,8 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id== R.id.action_exit){
+            System.exit(0);
         }
 
         return super.onOptionsItemSelected(item);
